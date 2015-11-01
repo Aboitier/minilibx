@@ -33,6 +33,8 @@ SRC	= mlx_init.c mlx_new_window.c mlx_pixel_put.c mlx_loop.c \
 OBJ	=$(SRC:.c=.o)
 CFLAGS	= -O3 -I$(INC)
 
+DESTDIR = /usr/local
+
 all	: $(NAME) $(DOCP)
 
 $(NAME)	: $(OBJ)
@@ -45,3 +47,9 @@ do_cp	:
 
 clean	:
 	rm -f $(OBJ) $(NAME) *~ core *.core
+
+install:
+	mkdir -p $(DESTDIR)/lib && cp $(NAME) $(DESTDIR)/lib
+	mkdir -p $(DESTDIR)/lib/pkgconfig && cp mlx.pc $(DESTDIR)/lib/pkgconfig
+	mkdir -p $(DESTDIR)/include && cp mlx.h $(DESTDIR)/include
+	mkdir -p $(DESTDIR)/man/man3 && cp man/man3/*.3 $(DESTDIR)/man/man3
